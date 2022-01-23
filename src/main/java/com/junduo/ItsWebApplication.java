@@ -10,9 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class ItsWebApplication {
-    // 将springboot应用启动
-    // springApplication类
-    // run方法
+    /**
+    * 将springboot应用启动
+    * springApplication类
+    * run方法
+    */
     public static void main(String[] args) {
         // 该方法返回一个ConfigurableApplicationContext对象
         // 参数一：应用入口的类       参数类：命令行参数
