@@ -1,20 +1,62 @@
 server:
+  # 设置访问端口
   port: 8081
-#选择要激活那个环境块
+  # 配置项目访问的根路径
+  servlet:
+    context-path: /
+
 spring:
-  profiles:
-    active: prod
+  # 关闭模板引擎的缓存
+  thymeleaf:
+    cache: false
+  # 设置热启动，方便调试
+  devtools:
+    restart:
+      enabled: true
+  # 设置国家化本地化语言配置参数
+  messages:
+    basename: i18n.login
 
----
-server:
-  port: 8083
-spring:
-  profiles: dev #配置环境的名称
+  datasource:
+    username: root
+    password: 991229
+    #?serverTimezone=UTC解决时区的报错
+    url: jdbc:mysql://localhost:3306/its?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource # 自定义数据库连接池为 durid
 
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+    #druid 数据源专有配置
+    # 初始化连接数
+    initialSize: 5
+    # 最小连接池数量
+    minIdle: 5
+    # 最大连接池数量
+    maxActive: 20
+    # 获取连接的最大等待时间
+    maxWait: 60000
+    # 连接间隔时间
+    timeBetweenEvictionRunsMillis: 60000
+    # 连接保持空闲而不被驱逐的最长时间
+    minEvictableIdleTimeMillis: 300000
+    # 检测连接是否有效的sql
+    validationQuery: SELECT 1 FROM DUAL
 
----
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
 
-server:
-  port: 8084
-spring:
-  profiles: prod  #配置环境的名称
+    #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+    #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+    #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+#整合MyBatis
+mybatis:
+  type-aliases-package: com.junduo.pojo
+  # classpath:就已经代表是resources目录了
+  mapper-locations: classpath:mybatis/mapper/*.xml
