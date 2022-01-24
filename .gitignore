@@ -1,0 +1,5 @@
+# 忽略的一些文件
+/out/
+/.idea/
+/target/
+/log/
