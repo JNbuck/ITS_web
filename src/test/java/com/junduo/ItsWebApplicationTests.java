@@ -1,35 +1,30 @@
 package com.junduo;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.junduo.mapper.DevicesMapper;
+import com.junduo.server.WebSocketServer;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 
-@SpringBootTest
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ItsWebApplicationTests {
 
-    //DI注入数据源
     @Autowired
-    DataSource dataSource;
+    private DevicesMapper devicesMapper;
+    private Logger logger = LoggerFactory.getLogger(ItsWebApplicationTests.class);
 
     @Test
-    public void contextLoads() throws SQLException {
-        //看一下默认数据源
-        System.out.println(dataSource.getClass());
-        //获得连接
-        Connection connection =   dataSource.getConnection();
-        System.out.println(connection);
-
-        DruidDataSource druidDataSource = (DruidDataSource) dataSource;
-        System.out.println("druidDataSource 数据源最大连接数：" + druidDataSource.getMaxActive());
-        System.out.println("druidDataSource 数据源初始化连接数：" + druidDataSource.getInitialSize());
-
-        //关闭连接
-        connection.close();
+    public void test1(){
+        devicesMapper.putDMap("1", new WebSocketServer());
     }
-
 }

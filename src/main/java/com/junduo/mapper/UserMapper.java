@@ -2,6 +2,7 @@ package com.junduo.mapper;
 
 import com.junduo.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +23,8 @@ import java.util.List;
 public interface UserMapper {
 
     List<User> queryUserList();
+
+    User queryUserByName(@Param("username") String username);
 
     User queryUserById(int id);
 
