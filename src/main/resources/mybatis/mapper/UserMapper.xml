@@ -13,6 +13,10 @@
         select * from its.user where id = #{id}
     </select>
 
+    <select id="queryUserByName" resultType="User" parameterType="string">
+        select * from its.user where username=#{username}
+    </select>
+
     <insert id="addUser" parameterType="User">
         insert into its.user(id,username,password) values(#{id},#{username},#{password})
     </insert>
