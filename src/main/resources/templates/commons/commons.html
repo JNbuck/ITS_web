@@ -4,11 +4,15 @@
 <!--头部导航栏-->
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" th:fragment="topbar">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#" th:text="${session.loginUser}"></a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-  <div class="navbar-nav">
+  <div class="col-md-8">
+    <form method="post" id="search">
+      <div class="row">
+        <input id="searchIN" name="searchMsg" class="form-control form-control-dark w-100 col-md-11" type="text" placeholder="Search" aria-label="Search">
+        <button id="searchBU" type="submit" class="btn btn-default col-md-1">Search</button>
+      </div>
+    </form>
+  </div>
+  <div class="navbar-nav col-md-1">
     <div class="nav-item text-nowrap">
       <a class="nav-link px-3" th:href="@{/user/out}">注销</a>
     </div>
@@ -25,46 +29,61 @@
         </a>
       </li>
       <li class="nav-item">
-        <a th:class="${active=='main.html' ? 'nav-link active' : 'nav-link'}" th:href="@{/main.html}" >
+        <a th:class="${active=='dashboard.html' ? 'nav-link active' : 'nav-link'}" th:href="@{/main.html}" >
           <span data-feather="home"></span>
           首页
         </a>
       </li>
       <li class="nav-item">
-        <a th:class="${active=='list.html' ? 'nav-link active' : 'nav-link'}" th:href="@{/emps}">
+        <a th:class="${active=='/user/list.html' ? 'nav-link active' : 'nav-link'}" th:href="@{/users}">
           <span data-feather="users"></span>
-          员工管理
+          人员管理
         </a>
       </li>
       <li class="nav-item">
-        <a th:class="${active=='xx' ? 'nav-link active' : 'nav-link'}" href="#">
+        <a th:class="${active=='/device/list.html' ? 'nav-link active' : 'nav-link'}" th:href="@{/devices}">
           <span data-feather="file"></span>
-          oss云盘
+          设备信息查询
         </a>
       </li>
       <li class="nav-item">
         <a th:class="${active=='xx' ? 'nav-link active' : 'nav-link'}" href="#">
-          <span data-feather="shopping-cart"></span>
-          协作市场
+          <span data-feather="bar-chart-2"></span>
+          路口相关流量监控
         </a>
       </li>
 
       <li class="nav-item">
         <a th:class="${active=='xx' ? 'nav-link active' : 'nav-link'}" href="#">
           <span data-feather="bar-chart-2"></span>
-          统计报告
+          异常报告
         </a>
       </li>
+
       <li class="nav-item">
         <a th:class="${active=='xx' ? 'nav-link active' : 'nav-link'}" href="#">
           <span data-feather="layers"></span>
-          项目日程
+          识别算法更换
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a th:class="${active=='xx' ? 'nav-link active' : 'nav-link'}" href="#">
+          <span data-feather="bar-chart-2"></span>
+          道路监控
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a th:class="${active=='xx' ? 'nav-link active' : 'nav-link'}" href="#">
+          <span data-feather="bar-chart-2"></span>
+          设备控制
         </a>
       </li>
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span>Saved reports</span>
+      <span>日志信息</span>
       <a class="link-secondary" href="#" aria-label="Add a new report">
         <span data-feather="plus-circle"></span>
       </a>
@@ -73,25 +92,25 @@
       <li class="nav-item">
         <a class="nav-link" href="#">
           <span data-feather="file-text"></span>
-          Current month
+          本日
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">
           <span data-feather="file-text"></span>
-          Last quarter
+          本周
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">
           <span data-feather="file-text"></span>
-          Social engagement
+          本月
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">
           <span data-feather="file-text"></span>
-          Year-end sale
+          上一个季度
         </a>
       </li>
     </ul>

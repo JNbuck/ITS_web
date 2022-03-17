@@ -1,6 +1,8 @@
 package com.junduo;
 
 import com.junduo.mapper.DevicesMapper;
+import com.junduo.mapper.UserMapper;
+import com.junduo.pojo.User;
 import com.junduo.server.WebSocketServer;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +22,16 @@ import javax.sql.DataSource;
 class ItsWebApplicationTests {
 
     @Autowired
-    private DevicesMapper devicesMapper;
-    private Logger logger = LoggerFactory.getLogger(ItsWebApplicationTests.class);
+    private UserMapper userMapper;
 
     @Test
     public void test1(){
-        devicesMapper.putDMap("1", new WebSocketServer());
+        try{
+            User user = new User(6, "junduoxv", "123");
+            userMapper.addUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
